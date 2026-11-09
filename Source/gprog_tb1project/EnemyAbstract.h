@@ -34,6 +34,8 @@ protected:
 
 	void ChangeColor(); // function that the enemy will call inside hearnoise 
 
+	void RevertColor(); // function that the enemy will call to revert its color back to normal
+
 public:
 	UPROPERTY(VisibleAnywhere, Category = "Enemy") // for the static meshes. both children will inherit this
 	UStaticMeshComponent* EnemyMesh;
@@ -50,4 +52,8 @@ public:
 
 	void Subscribe(Agprog_tb1projectCharacter* Player); // subscription function. receives pointer to player 
 	// has to be public bc enemyfactory is gonna use it
+
+protected:
+	FTimerHandle ColorTimerHandle; // timer handle for the enemies to revert color
+	// this allows the timer to restart from 5 secs if they get multiple noises
 };

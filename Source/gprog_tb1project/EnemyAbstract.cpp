@@ -61,6 +61,14 @@ void AEnemyAbstract::ChangeColor()
 			FName("TintColor"),
 			ReactionColor // ... to reactioncolor (red in this case)
 		);
+
+		GetWorldTimerManager().SetTimer( // calling revertcolor function here
+			ColorTimerHandle,
+			this,
+			&AEnemyAbstract::RevertColor,
+			5.0f,
+			false
+		); // basically use the timer handle to time 5 seconds. after 5 seconds, call revertcolor, don't restart timer
 	}
 }
 
@@ -70,5 +78,15 @@ void AEnemyAbstract::Subscribe(Agprog_tb1projectCharacter* Player)
 	{
 		Player->OnPlayerMadeNoise.AddDynamic(this, &AEnemyAbstract::HearNoise); 
 		// whenever Player broadcasts its event, "this" enemy will run its HearNoise function
+	}
+}
+
+void AEnemyAbstract::RevertColor() // basically the reverse of changecolor ^^ change the material color back to originalcolor
+{
+	if (EnemyDynamicMaterial != nullptr) {
+		EnemyDynamicMaterial->SetVectorParameterValue(
+			FName("TintColor"),
+			OriginalColor
+		);
 	}
 }
