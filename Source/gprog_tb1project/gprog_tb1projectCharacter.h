@@ -48,6 +48,10 @@ protected:
 	/** Mouse Look Input Action */
 	UPROPERTY(EditAnywhere, Category ="Input")
 	class UInputAction* MouseLookAction;
+
+	// hotkey stuff ("N") 
+	UPROPERTY(EditAnywhere, Category ="Input")
+	UInputAction* MakeNoiseAction; // just like the structure of the built in stuff ^^, make a variable called makenoiseaction to hold the pointer
 	
 public:
 	Agprog_tb1projectCharacter();
@@ -75,6 +79,9 @@ protected:
 	/** Handles jump end inputs from either controls or UI interfaces */
 	UFUNCTION(BlueprintCallable, Category="Input")
 	virtual void DoJumpEnd();
+
+	// hotkey stuff continued 
+	void MakeNoise();
 
 protected:
 

@@ -39,7 +39,7 @@ void AEnemuFactory::spawnrandomenemy() {
 
 	// step 5: put the pointer into the array
 	if (newenemy != nullptr) { // only if newenemy doesn't equal nullptr! because if it does, that means it's empty
-		spawnedenemies.Add(newenemy); // adding the pointer to the enemy into the array
+		spawnedenemies.AddTail(newenemy); // adding the pointer to the enemy into the array
 	}
 }
 

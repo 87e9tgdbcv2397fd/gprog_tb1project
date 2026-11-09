@@ -6,6 +6,7 @@
 #include "EnemyAbstract.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Containers/List.h"
 #include "EnemuFactory.generated.h"
 
 UCLASS()
@@ -29,7 +30,7 @@ public:
 	TSubclassOf<AEnemyAbstract> evilguyBP;
 
 	// array to store all the enemies the factory spawns
-	TArray<AEnemyAbstract*> spawnedenemies;
+	TDoubleLinkedList<AEnemyAbstract*> spawnedenemies;
 	// dynamic array
 	// called spawnedenemies
 	// holds pointers to all the enemies that are spawned

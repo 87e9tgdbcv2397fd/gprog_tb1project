@@ -59,6 +59,10 @@ void Agprog_tb1projectCharacter::SetupPlayerInputComponent(UInputComponent* Play
 		// Looking/Aiming
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &Agprog_tb1projectCharacter::LookInput);
 		EnhancedInputComponent->BindAction(MouseLookAction, ETriggerEvent::Triggered, this, &Agprog_tb1projectCharacter::LookInput);
+
+		// making noise function
+		EnhancedInputComponent->BindAction(MakeNoiseAction, ETriggerEvent::Started, this, &Agprog_tb1projectCharacter::MakeNoise);
+		//ETriggerEvent::Started means it only fires once (when you hit N) and not repeatedly as you hold it down
 	}
 	else
 	{
@@ -117,4 +121,9 @@ void Agprog_tb1projectCharacter::DoJumpEnd()
 {
 	// pass StopJumping to the character
 	StopJumping();
+}
+
+// makenoise function (writing what it actually does)
+void Agprog_tb1projectCharacter::MakeNoise() {
+	UE_LOG(Loggprog_tb1project, Warning, TEXT("PLEASE WORK!!!"));
 }
