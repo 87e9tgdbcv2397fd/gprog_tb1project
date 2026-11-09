@@ -125,5 +125,6 @@ void Agprog_tb1projectCharacter::DoJumpEnd()
 
 // makenoise function (writing what it actually does)
 void Agprog_tb1projectCharacter::MakeNoise() {
-	UE_LOG(Loggprog_tb1project, Warning, TEXT("PLEASE WORK!!!"));
+	UE_LOG(Loggprog_tb1project, Warning, TEXT("PLEASE WORK!!!")); // text in output log for testing
+	OnPlayerMadeNoise.Broadcast(GetActorLocation()); // when the event is broadcasted, get actor (player) location, and send it
 }

@@ -15,6 +15,13 @@ struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
+// make delegate type for the observer (this is supposed to broadcast the event)
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
+	FOnPlayerMadeNoise, // name of the event
+	FVector, // it's gonna send a vector
+	NoiseLocation // name of the info it gives (bc the vector is gonna be the player location)
+);
+
 /**
  *  A basic first person character
  */
@@ -96,6 +103,10 @@ public:
 
 	/** Returns first person camera component **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
+
+	// the event that the enemies will subscribe to 
+	UPROPERTY(BlueprintAssignable, Category = "Events")
+	FOnPlayerMadeNoise OnPlayerMadeNoise;
 
 };
 

@@ -7,6 +7,8 @@
 #include "GameFramework/Actor.h"
 #include "EnemyAbstract.generated.h"
 
+class Agprog_tb1projectCharacter; // so the enemies can subscribe to the player's event broadcast
+
 UCLASS(Abstract)
 class GPROG_TB1PROJECT_API AEnemyAbstract : public AActor
 {
@@ -27,7 +29,25 @@ public:
 protected:
 	float hearingrange = 100.0f; // protected variable so children can access. hearingrange is a float they will all have
 
+	UFUNCTION()
+	void HearNoise(FVector NoiseLocation); // declare a function HearNoise that accepts a FVector input called NoiseLocation
+
+	void ChangeColor(); // function that the enemy will call inside hearnoise 
+
 public:
 	UPROPERTY(VisibleAnywhere, Category = "Enemy") // for the static meshes. both children will inherit this
 	UStaticMeshComponent* EnemyMesh;
+
+	// make a pointer for the enemies' individual instances of the material
+	UPROPERTY()
+	UMaterialInstanceDynamic* EnemyDynamicMaterial;
+
+	UPROPERTY()
+	FLinearColor OriginalColor; // OriginalColor (variable) stores the original color of the enemy, whether green (slime) or black (evilguy)
+
+	UPROPERTY(EditAnywhere, Category = "Enemy")
+	FLinearColor ReactionColor = FLinearColor::Red; // ReactionColor (variable) stores the color it's gonna turn (red)
+
+	void Subscribe(Agprog_tb1projectCharacter* Player); // subscription function. receives pointer to player 
+	// has to be public bc enemyfactory is gonna use it
 };

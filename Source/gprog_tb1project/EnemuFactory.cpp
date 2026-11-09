@@ -4,9 +4,17 @@
 #include "EnemuFactory.h"
 #include "Enemy_Slime.h"
 #include "Enemy_EvilGuy.h"
+#include "gprog_tb1projectCharacter.h"
+#include "Kismet/GameplayStatics.h"
 
 // now i have to specify what the spawnrandomenemy function is going to do
 void AEnemuFactory::spawnrandomenemy() {
+
+	// get a pointer to the player character
+	Agprog_tb1projectCharacter* PlayerCharacter = // the pointer is stored in the variable PlayerCharacter
+		Cast<Agprog_tb1projectCharacter>(
+			UGameplayStatics::GetPlayerCharacter(this, 0) // this stuff makes the pointer of the first player character in the game (me)
+		);
 
 	// step 1: pick whether to spawn Slime (0) or EvilGuy(1) and store it into enemychoice
 	int32 enemychoice = FMath::RandRange(0, 1);
@@ -37,9 +45,13 @@ void AEnemuFactory::spawnrandomenemy() {
 		);
 	}
 
-	// step 5: put the pointer into the array
+	// step 5: put the pointer into the linked list, and subscribe it to the player's event broadcasting
 	if (newenemy != nullptr) { // only if newenemy doesn't equal nullptr! because if it does, that means it's empty
-		spawnedenemies.AddTail(newenemy); // adding the pointer to the enemy into the array
+		spawnedenemies.AddTail(newenemy); // adding the pointer to the enemy into the linked list
+
+		if (PlayerCharacter != nullptr) {
+			newenemy->Subscribe(PlayerCharacter);
+		}
 	}
 }
 
