@@ -56,4 +56,10 @@ public:
 protected:
 	FTimerHandle ColorTimerHandle; // timer handle for the enemies to revert color
 	// this allows the timer to restart from 5 secs if they get multiple noises
+
+	int32 enemyID = 0; // unique enemy id variable to identify each enemy
+
+public:
+	void setenemyID(int32 newID); // setter function so enemyID can be changed
+	int32 getenemyID() const; // getter function. const means it can't be changed
 };

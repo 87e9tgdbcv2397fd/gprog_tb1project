@@ -90,3 +90,13 @@ void AEnemyAbstract::RevertColor() // basically the reverse of changecolor ^^ ch
 		);
 	}
 }
+
+void AEnemyAbstract::setenemyID(int32 newID) 
+{
+	enemyID = newID;
+}
+
+int32 AEnemyAbstract::getenemyID() const
+{
+	return enemyID;
+}

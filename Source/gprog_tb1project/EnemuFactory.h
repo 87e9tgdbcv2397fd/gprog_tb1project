@@ -34,4 +34,14 @@ public:
 	// dynamic array
 	// called spawnedenemies
 	// holds pointers to all the enemies that are spawned
+
+private:
+	int32 nextenemyID = 1; // adds to the enemyID variable so it increments
+
+private:
+	AEnemyAbstract* selectedenemy = nullptr; // points to selected enemy. starts off nullptr bc you didn't select anything yet
+
+public:
+	void selectenemy(int32 enemyID); // enemy selector function
+	void killselectedenemy(); // enemy kill function
 };
