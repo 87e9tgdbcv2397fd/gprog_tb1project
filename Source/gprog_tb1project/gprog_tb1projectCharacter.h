@@ -7,6 +7,7 @@
 #include "Logging/LogMacros.h"
 #include "gprog_tb1projectCharacter.generated.h"
 
+class AEnemuFactory;
 class UInputComponent;
 class USkeletalMeshComponent;
 class UCameraComponent;
@@ -56,9 +57,28 @@ protected:
 	UPROPERTY(EditAnywhere, Category ="Input")
 	class UInputAction* MouseLookAction;
 
-	// hotkey stuff ("N") 
+	// hotkey stuff ("N" for noise)
 	UPROPERTY(EditAnywhere, Category ="Input")
 	UInputAction* MakeNoiseAction; // just like the structure of the built in stuff ^^, make a variable called makenoiseaction to hold the pointer
+
+	// more hotkey stuff (1-5 selection)
+	UPROPERTY(EditAnywhere, Category = "Input")
+	UInputAction* SelectEnemy1Action;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	UInputAction* SelectEnemy2Action;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	UInputAction* SelectEnemy3Action;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	UInputAction* SelectEnemy4Action;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	UInputAction* SelectEnemy5Action;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	UInputAction* KillEnemyAction;
 	
 public:
 	Agprog_tb1projectCharacter();
@@ -90,6 +110,14 @@ protected:
 	// hotkey stuff continued 
 	void MakeNoise();
 
+	// hotkey stuff for selecting/killing enemy
+	void SelectEnemy1();
+	void SelectEnemy2();
+	void SelectEnemy3();
+	void SelectEnemy4();
+	void SelectEnemy5();
+	void KillSelectedEnemy();
+
 protected:
 
 	/** Set up input action bindings */
@@ -108,5 +136,10 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "Events")
 	FOnPlayerMadeNoise OnPlayerMadeNoise;
 
+protected:
+	UPROPERTY()
+	AEnemuFactory* factorypointer = nullptr; // pointer that will point to the factory, starts off pointing to nothing 
+
+	virtual void BeginPlay() override;
 };
 

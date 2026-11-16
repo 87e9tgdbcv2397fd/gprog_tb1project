@@ -14,6 +14,14 @@ AEnemyAbstract::AEnemyAbstract()
 	EnemyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("EnemyMesh"));
 	RootComponent = EnemyMesh;
 
+	// for the nametags:
+	EnemyNametag = CreateDefaultSubobject<UTextRenderComponent>(TEXT("EnemyNametagText")); // make the text component, assign it to the EnemyNametag variable
+	EnemyNametag->SetupAttachment(RootComponent); // attach the component to the enemy so they're connected
+
+	// nametag details
+	EnemyNametag->SetRelativeLocation(FVector(0.0f, 0.0f, 150.0f)); // 150 units above the enemy it's tied to
+	EnemyNametag->SetHorizontalAlignment(EHTA_Center); // center it
+	EnemyNametag->SetWorldSize(40.0f); // text size
 }
 
 // Called when the game starts or when spawned
@@ -94,6 +102,11 @@ void AEnemyAbstract::RevertColor() // basically the reverse of changecolor ^^ ch
 void AEnemyAbstract::setenemyID(int32 newID) 
 {
 	enemyID = newID;
+
+	// nametag stuff
+	EnemyNametag->SetText(
+		FText::FromString(FString::Printf(TEXT("%d"), enemyID))
+	);
 }
 
 int32 AEnemyAbstract::getenemyID() const

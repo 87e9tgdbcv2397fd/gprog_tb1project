@@ -128,8 +128,8 @@ void AEnemuFactory::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	// when beginplay happens, run spawnrandomenemy function 10 times. this will spawn 10 enemies
-	for (int32 i = 0; i < 10; i = i + 1) {
+	// when beginplay happens, run spawnrandomenemy function 5 times. this will spawn 5 enemies
+	for (int32 i = 0; i < 5; i = i + 1) {
 		spawnrandomenemy();
 	}
 }

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Components/StaticMeshComponent.h" // for the static meshes
+#include "Components/TextRenderComponent.h" // for the nametags
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "EnemyAbstract.generated.h"
@@ -52,6 +53,9 @@ public:
 
 	void Subscribe(Agprog_tb1projectCharacter* Player); // subscription function. receives pointer to player 
 	// has to be public bc enemyfactory is gonna use it
+
+	UPROPERTY(VisibleAnywhere, Category = "Enemy") // for the nametags
+	UTextRenderComponent* EnemyNametag;
 
 protected:
 	FTimerHandle ColorTimerHandle; // timer handle for the enemies to revert color
